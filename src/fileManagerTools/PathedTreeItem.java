@@ -37,6 +37,7 @@ public final class PathedTreeItem extends TreeItem<Path> {
     private String nameOfFile;
     private SimpleLongProperty ssize;
     private long size;
+    private String sizeInFormatedString;
     private String lastModFormatedString;
     private final DateFormat df = new SimpleDateFormat("yyyy. MMMM. dd в hh:mm");
     private FileTime ft;
@@ -50,6 +51,7 @@ public final class PathedTreeItem extends TreeItem<Path> {
         nameOfFile = getNameOfFile();
         extension = getExtension();
         size = getSize();
+        sizeInFormatedString = getSizeInFormatedString();
         lastModFormatedString = getLastModFormatedString();
 
         subPaths = new ArrayList<>();
@@ -63,13 +65,13 @@ public final class PathedTreeItem extends TreeItem<Path> {
     // Path constructor
     public PathedTreeItem(Path path) {
         super(path);
-        this.ssize = new SimpleLongProperty(size);
         this.path = path;
 
         fullFileName = path.toString();
         nameOfFile = getNameOfFile();
         extension = getExtension();
         size = getSize();
+        sizeInFormatedString = getSizeInFormatedString();
         lastModFormatedString = getLastModFormatedString();
 
         subPaths = new ArrayList<>();
@@ -240,13 +242,17 @@ public final class PathedTreeItem extends TreeItem<Path> {
         return extension;
     }
 
-    public Integer getSize() {
+    public String getFormatedSize() {
+        return giveMeStringFromLong(size);
+    }
+
+    public Long getSize() {
         try {
             size = Files.size(this.getValue()) / 1024;
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return (int) size;
+        return size;
     }
 
     public String getLastModFormatedString() {
@@ -257,5 +263,35 @@ public final class PathedTreeItem extends TreeItem<Path> {
             ex.printStackTrace();
         }
         return lastModFormatedString;
+    }
+
+    public String getSizeInFormatedString() {
+        sizeInFormatedString = giveMeStringFromLong(size);
+        return sizeInFormatedString;
+    }
+
+    private static String giveMeStringFromLong(long size) {
+        Long longSizeIncome = size;
+        String resultFormatedSizeTostring = "";
+        String incomLongToString = longSizeIncome.toString();
+        Integer integerFromLongByString = Integer.parseInt(incomLongToString);
+        String stringFromInteger = integerFromLongByString.toString();
+        int start;
+        int end;
+        for (int j = 0; j < stringFromInteger.length();) {
+            start = j;
+            end = j + stringFromInteger.length() / 3;
+            resultFormatedSizeTostring = resultFormatedSizeTostring + stringFromInteger.substring(start, end) + "\'";
+            j = j + stringFromInteger.length() / 3;
+
+            if (j == stringFromInteger.length()) {
+                resultFormatedSizeTostring = resultFormatedSizeTostring.substring(0, resultFormatedSizeTostring.length() - 1);
+                break;
+            } else if (j > stringFromInteger.length()) {
+                resultFormatedSizeTostring = resultFormatedSizeTostring + stringFromInteger.substring(j - stringFromInteger.length() / 3, stringFromInteger.length());
+                break;
+            }
+        }
+        return resultFormatedSizeTostring;
     }
 }

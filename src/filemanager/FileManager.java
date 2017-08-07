@@ -22,7 +22,7 @@ public class FileManager extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
 
-        //root.setStyle(STYLESHEET_MODENA);
+        root.setStyle(STYLESHEET_MODENA);
         Scene scene = new Scene(root);
 
         stage.setScene(scene);

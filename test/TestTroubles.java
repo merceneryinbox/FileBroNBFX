@@ -1,13 +1,5 @@
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.attribute.FileTime;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,7 +16,8 @@ public class TestTroubles {
     private static String fullFileName;
 
     public static void main(String[] args) throws InterruptedException {
-        try {
+
+        /* try {
             Path p = Paths.get("D:\\123.fxml");
             FileTime ft = Files.getLastModifiedTime(p);
             DateFormat df = new SimpleDateFormat("dd.MMMM.yyyy года в hh:mm");
@@ -36,6 +29,7 @@ public class TestTroubles {
         } catch (IOException ex) {
             Logger.getLogger(TestTroubles.class.getName()).log(Level.SEVERE, null, ex);
         }
+         */
     }
 
     /*
@@ -81,6 +75,38 @@ public class TestTroubles {
         path = givenPath;
         return fullFileName = path.getFileName().toString().toLowerCase();
 
+    }
+
+    private static String giveMeStringFromLong(long size) {
+        Long longSizeIncome = new Long(size);
+        String c = "";
+        String f = longSizeIncome.toString();
+        Integer i = Integer.parseInt(f);
+        String s = i.toString();
+        System.out.println(s);
+        int start;
+        int end;
+        for (int j = 0; j < s.length();) {
+            System.out.println("j = " + j);
+            start = j;
+            end = j + s.length() / 3;
+            System.out.println("start = " + start);
+            System.out.println("end = " + end);
+            c = c + s.substring(start, end) + "\'";
+            System.out.println("c = " + c);
+            j = j + s.length() / 3;
+
+            if (j == s.length()) {
+                c = c.substring(0, c.length() - 1);
+                break;
+            } else if (j > s.length()) {
+                c = c + s.substring(j - s.length() / 3, s.length());
+                break;
+            }
+        }
+        System.out.println("C = " + c);
+
+        return c;
     }
 
 }
