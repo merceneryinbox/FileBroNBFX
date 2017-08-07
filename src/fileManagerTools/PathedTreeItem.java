@@ -257,38 +257,4 @@ public final class PathedTreeItem extends TreeItem<Path> {
         }
         return lastModFormatedString;
     }
-
-    // Ondemand slow method
-    /*private static String giveMeStringFromLong(long size) {
-        Long longSizeIncome = size;
-        String resultFormatedSizeTostring = "";
-        String incomLongToString = longSizeIncome.toString();
-        Integer integerFromLongByString = Integer.parseInt(incomLongToString);
-        String stringFromInteger = integerFromLongByString.toString();
-        int start;
-        int end;
-        int y = stringFromInteger.length();
-
-        if (y > 3) {
-            for (int j = 0; j < y;) {
-
-                System.out.println(y);
-                start = j;
-                end = j + stringFromInteger.length() / 3;
-                resultFormatedSizeTostring = resultFormatedSizeTostring + stringFromInteger.substring(start, end) + "\'";
-                j = j + stringFromInteger.length() / 3;
-
-                if (j == stringFromInteger.length()) {
-                    resultFormatedSizeTostring = resultFormatedSizeTostring.substring(0, resultFormatedSizeTostring.length() - 1);
-                    break;
-                } else if (j > stringFromInteger.length()) {
-                    resultFormatedSizeTostring = resultFormatedSizeTostring + stringFromInteger.substring(j - stringFromInteger.length() / 3, stringFromInteger.length());
-                    break;
-                }
-            }
-        } else {
-            resultFormatedSizeTostring = "";
-        }
-        return resultFormatedSizeTostring;
-    }*/
 }

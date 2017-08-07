@@ -77,36 +77,38 @@ public class TestTroubles {
 
     }
     /*
-    private static String giveMeStringFromLong(long size) {
-        Long longSizeIncome = new Long(size);
-        String c = "";
-        String f = longSizeIncome.toString();
-        Integer i = Integer.parseInt(f);
-        String s = i.toString();
-        System.out.println(s);
-        int start;
-        int end;
-        for (int j = 0; j < s.length();) {
-            System.out.println("j = " + j);
-            start = j;
-            end = j + s.length() / 3;
-            System.out.println("start = " + start);
-            System.out.println("end = " + end);
-            c = c + s.substring(start, end) + "\'";
-            System.out.println("c = " + c);
-            j = j + s.length() / 3;
+   private static String giveMeStringFromLong(long size) {
+		Long longSizeIncome = new Long(size);
 
-            if (j == s.length()) {
-                c = c.substring(0, c.length() - 1);
-                break;
-            } else if (j > s.length()) {
-                c = c + s.substring(j - s.length() / 3, s.length());
-                break;
-            }
-        }
-        System.out.println("C = " + c);
+		System.out.println(size/1024);
+		String c = "";
+		String f = longSizeIncome.toString();
+		Integer i = Integer.parseInt(f);
+		String s = i.toString();
+		System.out.println(s);
+		int start;
+		int end;
+		for (int j = 0; j < s.length();) {
+			System.out.println("j = " + j);
+			start = j;
+			end = j + s.length() / 3;
+			System.out.println("start = " + start);
+			System.out.println("end = " + end);
+			c = c + s.substring(start, end) + "\'";
+			System.out.println("c = " + c);
+			j = j + s.length() / 3;
 
-        return c;
-    }
+			if (j == s.length()) {
+				c = c.substring(0, c.length() - 1);
+				break;
+			} else if (j > s.length()) {
+				c = c + s.substring(j - s.length() / 3, s.length());
+				break;
+			}
+		}
+		System.out.println("C = " + c);
+
+		return c;
+	}
      */
 }
