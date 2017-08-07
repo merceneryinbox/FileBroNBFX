@@ -116,7 +116,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TableColumn<PathedTreeItem, String> tblViewClmnFileExt;
     @FXML
-    private TableColumn<PathedTreeItem, String> tblViewClmnFileSize;
+    private TableColumn<PathedTreeItem, Number> tblViewClmnFileSize;
     @FXML
     private TableColumn<PathedTreeItem, Number> tblViewClmnFileLastMod;
 
@@ -140,7 +140,7 @@ public class FXMLDocumentController implements Initializable {
 
         tblViewClmnFileName.setCellValueFactory(new PropertyValueFactory<PathedTreeItem, String>("nameOfFile"));
         tblViewClmnFileExt.setCellValueFactory(new PropertyValueFactory<PathedTreeItem, String>("extension"));
-        tblViewClmnFileSize.setCellValueFactory(new PropertyValueFactory<PathedTreeItem, String>("sizeInFormatedString"));
+        tblViewClmnFileSize.setCellValueFactory(new PropertyValueFactory<PathedTreeItem, Number>("size"));
         tblViewClmnFileLastMod.setCellValueFactory(new PropertyValueFactory<PathedTreeItem, Number>("lastModFormatedString"));
 
 // create list with PathedTreeItems from list of root directoryes in filesystem

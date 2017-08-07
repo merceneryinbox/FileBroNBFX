@@ -76,7 +76,7 @@ public class TestTroubles {
         return fullFileName = path.getFileName().toString().toLowerCase();
 
     }
-
+    /*
     private static String giveMeStringFromLong(long size) {
         Long longSizeIncome = new Long(size);
         String c = "";
@@ -108,5 +108,5 @@ public class TestTroubles {
 
         return c;
     }
-
+     */
 }

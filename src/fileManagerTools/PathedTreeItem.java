@@ -15,7 +15,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.beans.property.SimpleLongProperty;
 import javafx.scene.control.TreeItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -35,9 +34,7 @@ public final class PathedTreeItem extends TreeItem<Path> {
 
     private String extension;
     private String nameOfFile;
-    private SimpleLongProperty ssize;
     private long size;
-    private String sizeInFormatedString;
     private String lastModFormatedString;
     private final DateFormat df = new SimpleDateFormat("yyyy. MMMM. dd в hh:mm");
     private FileTime ft;
@@ -51,8 +48,8 @@ public final class PathedTreeItem extends TreeItem<Path> {
         nameOfFile = getNameOfFile();
         extension = getExtension();
         size = getSize();
-        sizeInFormatedString = getSizeInFormatedString();
-        lastModFormatedString = getLastModFormatedString();
+        // sizeInFormatedString = getSizeInFormatedString();
+        // lastModFormatedString = getLastModFormatedString();
 
         subPaths = new ArrayList<>();
         subPathItems = new ArrayList<>();
@@ -71,8 +68,8 @@ public final class PathedTreeItem extends TreeItem<Path> {
         nameOfFile = getNameOfFile();
         extension = getExtension();
         size = getSize();
-        sizeInFormatedString = getSizeInFormatedString();
-        lastModFormatedString = getLastModFormatedString();
+        // sizeInFormatedString = getSizeInFormatedString();
+        //lastModFormatedString = getLastModFormatedString();
 
         subPaths = new ArrayList<>();
         subPathItems = new ArrayList<>();
@@ -242,10 +239,6 @@ public final class PathedTreeItem extends TreeItem<Path> {
         return extension;
     }
 
-    public String getFormatedSize() {
-        return giveMeStringFromLong(size);
-    }
-
     public Long getSize() {
         try {
             size = Files.size(this.getValue()) / 1024;
@@ -265,12 +258,8 @@ public final class PathedTreeItem extends TreeItem<Path> {
         return lastModFormatedString;
     }
 
-    public String getSizeInFormatedString() {
-        sizeInFormatedString = giveMeStringFromLong(size);
-        return sizeInFormatedString;
-    }
-
-    private static String giveMeStringFromLong(long size) {
+    // Ondemand slow method
+    /*private static String giveMeStringFromLong(long size) {
         Long longSizeIncome = size;
         String resultFormatedSizeTostring = "";
         String incomLongToString = longSizeIncome.toString();
@@ -278,20 +267,28 @@ public final class PathedTreeItem extends TreeItem<Path> {
         String stringFromInteger = integerFromLongByString.toString();
         int start;
         int end;
-        for (int j = 0; j < stringFromInteger.length();) {
-            start = j;
-            end = j + stringFromInteger.length() / 3;
-            resultFormatedSizeTostring = resultFormatedSizeTostring + stringFromInteger.substring(start, end) + "\'";
-            j = j + stringFromInteger.length() / 3;
+        int y = stringFromInteger.length();
 
-            if (j == stringFromInteger.length()) {
-                resultFormatedSizeTostring = resultFormatedSizeTostring.substring(0, resultFormatedSizeTostring.length() - 1);
-                break;
-            } else if (j > stringFromInteger.length()) {
-                resultFormatedSizeTostring = resultFormatedSizeTostring + stringFromInteger.substring(j - stringFromInteger.length() / 3, stringFromInteger.length());
-                break;
+        if (y > 3) {
+            for (int j = 0; j < y;) {
+
+                System.out.println(y);
+                start = j;
+                end = j + stringFromInteger.length() / 3;
+                resultFormatedSizeTostring = resultFormatedSizeTostring + stringFromInteger.substring(start, end) + "\'";
+                j = j + stringFromInteger.length() / 3;
+
+                if (j == stringFromInteger.length()) {
+                    resultFormatedSizeTostring = resultFormatedSizeTostring.substring(0, resultFormatedSizeTostring.length() - 1);
+                    break;
+                } else if (j > stringFromInteger.length()) {
+                    resultFormatedSizeTostring = resultFormatedSizeTostring + stringFromInteger.substring(j - stringFromInteger.length() / 3, stringFromInteger.length());
+                    break;
+                }
             }
+        } else {
+            resultFormatedSizeTostring = "";
         }
         return resultFormatedSizeTostring;
-    }
+    }*/
 }
