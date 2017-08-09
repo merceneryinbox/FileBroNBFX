@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -63,16 +64,16 @@
                 <ScrollPane fitToHeight="true" fitToWidth="true" minHeight="200.0" minWidth="200.0" prefHeight="567.0" prefWidth="399.0">
                     <content>
                         <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="574.0" prefWidth="443.0">
-                     <children>
-                        <TableView fx:id="tblVCenter" editable="true" minWidth="300.0" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <columns>
-                            <TableColumn fx:id="tblViewClmnFileName" maxWidth="400.0" minWidth="150.0" prefWidth="150.0" text="File name" />
-                            <TableColumn fx:id="tblViewClmnFileExt" maxWidth="85.0" minWidth="75.0" prefWidth="75.0" text="Extension" />
-                              <TableColumn fx:id="tblViewClmnFileSize" maxWidth="130.0" minWidth="100.0" prefWidth="100.0" text="Size kB" />
-                              <TableColumn fx:id="tblViewClmnFileLastMod" maxWidth="205.0" minWidth="105.0" prefWidth="105.0" text="last modification" />
-                          </columns>
-                        </TableView>
-                     </children>
+                            <children>
+                                <TableView fx:id="tblVCenter" editable="true" minWidth="300.0" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <columns>
+                                        <TableColumn fx:id="tblViewClmnFileName" maxWidth="400.0" minWidth="150.0" prefWidth="150.0" text="File name" />
+                                        <TableColumn fx:id="tblViewClmnFileExt" maxWidth="85.0" minWidth="75.0" prefWidth="75.0" text="Extension" />
+                                        <TableColumn fx:id="tblViewClmnFileSize" maxWidth="130.0" minWidth="100.0" prefWidth="100.0" text="Size kB" />
+                                        <TableColumn fx:id="tblViewClmnFileLastMod" maxWidth="205.0" minWidth="105.0" prefWidth="105.0" text="last modification" />
+                                    </columns>
+                                </TableView>
+                            </children>
                         </AnchorPane>
                     </content>
                 </ScrollPane>
@@ -80,6 +81,11 @@
                     <children>
                         <TextArea fx:id="txtAreaLeft" editable="false" layoutY="7.0" maxWidth="250.0" minHeight="200.0" minWidth="200.0" prefHeight="551.0" prefWidth="221.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         </TextArea>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="409.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="8.0">
+                            <image>
+                                <Image url="@Гиперкуб.gif" />
+                            </image>
+                        </ImageView>
                     </children>
                 </AnchorPane>
             </items>
