@@ -27,6 +27,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -38,6 +39,7 @@ import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 public class FXMLDocumentController implements Initializable {
 
@@ -63,8 +65,6 @@ public class FXMLDocumentController implements Initializable {
     private MenuItem ssMnNew;
     @FXML
     private MenuItem ssmnOpen;
-    @FXML
-    private MenuItem mnOpenRecent;
     @FXML
     private MenuItem ssMnSave;
     @FXML
@@ -205,6 +205,7 @@ public class FXMLDocumentController implements Initializable {
                             tblVCenter.setItems(FXCollections.observableList(subPathedTIListInSelectedPTI));
                         }
                     });
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
@@ -225,6 +226,31 @@ public class FXMLDocumentController implements Initializable {
         });
     } // не удалять !
 
+    // start of menu items click handling
+    public void fileMnMethodSelect(ActionEvent actionEvent) {
+        Object sourceOfInvokeObject = actionEvent.getSource();
+        if (!(sourceOfInvokeObject instanceof MenuItem)) {
+            return;
+        }
+        MenuItem clikedMenuItem = (MenuItem) sourceOfInvokeObject;
+        String nameOfClickedBtn = clikedMenuItem.getId();
+        switch (nameOfClickedBtn) {
+            case "ssMnNew":
+                makeNew();
+            case "ssMnOpen":
+                openFolder();
+            case "ssSave":
+                save();
+            case "ssSaveAs":
+                saveAs();
+            case "ssMnPreferences":
+                preferences();
+            case "ssMnQuit":
+                quitApp();
+
+        }
+    }
+
 // Start menu File commands
     @FXML
 
@@ -234,11 +260,6 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     public void openFolder() {
-
-    }
-
-    @FXML
-    public void openRecent() {
 
     }
 
@@ -313,5 +334,12 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     public void dropDisks() {
 
+    }
+
+    // main controller methods
+    public void closeDialog(ActionEvent ae) {
+        Node closeSourceNode = (Node) ae.getSource();
+        Stage closeStage = (Stage) closeSourceNode.getScene().getWindow();
+        closeStage.close();
     }
 }
