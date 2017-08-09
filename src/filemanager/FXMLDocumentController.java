@@ -177,20 +177,17 @@ public class FXMLDocumentController implements Initializable {
                 selectedPTI = (PathedTreeItem) newValue; // приведение типа
                 selectedPTI.populateMyself();
                 Path tmpPath = selectedPTI.getValue();
-                subPathedTIListInSelectedPTI.clear(); // обнуление листа подэлементов выбранного в предыдущий раз элемента
-
-                // если выбранный элемент - папка = > берём каждый подэлемент папки и обрачиваем его в PathedTreeItem, добавляя
-                // в лист подэлементов - subPathedTIListInSelectedPTI
-                (new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            //List<Path> subLiStPath = new ArrayList<>();
+                subPathedTIListInSelectedPTI.clear(); // обнуление верменного листа подэлементов выбранного элемента
+                try {
+                    pool.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            // если выбранный элемент - папка = > берём каждый подэлемент папки и обрачиваем его в
+                            // PathedTreeItem, добавляя полученное в лист подэлементов - subPathedTIListInSelectedPTI
                             if (Files.isDirectory(tmpPath)) {
                                 try (DirectoryStream<Path> subLiStream = Files.newDirectoryStream(tmpPath)) {
                                     for (Path path : subLiStream) {
                                         subPathedTIListInSelectedPTI.add(new PathedTreeItem(path));
-                                        //subLiStPath.add(path);
                                     }
                                 } catch (IOException ex) {
                                     ex.printStackTrace();
@@ -202,29 +199,28 @@ public class FXMLDocumentController implements Initializable {
                                 subPathedTIListInSelectedPTI.add(new PathedTreeItem(tmpPath));
                             }
 
-                            // оборачиваем полученный subPathedTIListInSelectedPTI типа - ArrayList в тип FXCollections.observableList
+                            // оборачиваем полученный subPathedTIListInSelectedPTI типа - ArrayList в тип ObservableList
                             // и добавляем этот лист в таблицу (оборачивание нужно т.к. TableView принимает только ObservableList
-                            //tblVCenter.setItems(null);
+                            // tblVCenter.setItems(null);
                             tblVCenter.setItems(FXCollections.observableList(subPathedTIListInSelectedPTI));
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        } finally {
-                            System.out.println("attempt to shutdown executor");
-                            pool.shutdown();
-                            try {
-                                pool.awaitTermination(5, TimeUnit.SECONDS);
-                            } catch (InterruptedException ex) {
-                                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            if (!pool.isTerminated()) {
-                                System.err.println("cancel non-finished tasks");
-                            }
-                            pool.shutdownNow();
-                            System.out.println("shutdown finished");
                         }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    System.out.println("attempt to shutdown executor");
+                    pool.shutdown();
+                    try {
+                        pool.awaitTermination(5, TimeUnit.SECONDS);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                })).start();
+                    if (!pool.isTerminated()) {
+                        System.err.println("cancel non-finished tasks");
+                    }
+                    pool.shutdownNow();
+                    System.out.println("shutdown finished");
+                }
             }
         });
     } // не удалять !

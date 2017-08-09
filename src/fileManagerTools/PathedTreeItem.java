@@ -55,7 +55,7 @@ public final class PathedTreeItem extends TreeItem<Path> {
         subPathItems = new ArrayList<>();
 
         if (path.getParent() != null) {
-            // autosetIcon();
+            autosetIcon();
         }
     }
 
@@ -74,7 +74,7 @@ public final class PathedTreeItem extends TreeItem<Path> {
         subPaths = new ArrayList<>();
         subPathItems = new ArrayList<>();
         if (path.getParent() != null) {
-            // autosetIcon();
+            autosetIcon();
         }
     }
 
@@ -125,7 +125,7 @@ public final class PathedTreeItem extends TreeItem<Path> {
 
                 if (this.getVisited() == true && this.getParent() != null) {
                     try {
-                        this.setGraphic(new ImageView(new Image((getClass().getResourceAsStream("folder_opened.png")))));
+                        this.setGraphic(new ImageView(new Image((getClass().getResourceAsStream("icoes\\folder_opened.png")))));
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -133,7 +133,7 @@ public final class PathedTreeItem extends TreeItem<Path> {
 
                 } else if (this.getVisited() == false && this.getParent() != null) {
                     try {
-                        this.setGraphic(new ImageView(getClass().getResource("folder_closed.png").toExternalForm()));
+                        this.setGraphic(new ImageView(getClass().getResource("icoes\\folder_closed.png").toExternalForm()));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -142,7 +142,7 @@ public final class PathedTreeItem extends TreeItem<Path> {
 
             case "archive":
                 try {
-                    this.setGraphic(new ImageView(getClass().getResource("archive.png").toExternalForm()));
+                    this.setGraphic(new ImageView(getClass().getResource("icoes\\archive.png").toExternalForm()));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -150,7 +150,7 @@ public final class PathedTreeItem extends TreeItem<Path> {
 
             case "exe":
                 try {
-                    this.setGraphic(new ImageView(getClass().getResource("exe.png").toExternalForm()));
+                    this.setGraphic(new ImageView(getClass().getResource("icoes\\exe.png").toExternalForm()));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -158,7 +158,7 @@ public final class PathedTreeItem extends TreeItem<Path> {
 
             case "office":
                 try {
-                    this.setGraphic(new ImageView(getClass().getResource("office.png").toExternalForm()));
+                    this.setGraphic(new ImageView(getClass().getResource("icoes\\office.png").toExternalForm()));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -166,7 +166,7 @@ public final class PathedTreeItem extends TreeItem<Path> {
 
             case "web":
                 try {
-                    this.setGraphic(new ImageView(getClass().getResource("web.png").toExternalForm()));
+                    this.setGraphic(new ImageView(getClass().getResource("icoes\\web.png").toExternalForm()));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -174,7 +174,7 @@ public final class PathedTreeItem extends TreeItem<Path> {
 
             case "picture":
                 try {
-                    this.setGraphic(new ImageView(getClass().getResource("picture.png").toExternalForm()));
+                    this.setGraphic(new ImageView(getClass().getResource("icoes\\picture.png").toExternalForm()));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -182,7 +182,7 @@ public final class PathedTreeItem extends TreeItem<Path> {
 
             case "multimedia":
                 try {
-                    this.setGraphic(new ImageView(getClass().getResource("multimedia.png").toExternalForm()));
+                    this.setGraphic(new ImageView(getClass().getResource("icoes\\multimedia.png").toExternalForm()));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -190,7 +190,7 @@ public final class PathedTreeItem extends TreeItem<Path> {
 
             case "others":
                 try {
-                    this.setGraphic(new ImageView(getClass().getResource("other.png").toExternalForm()));
+                    this.setGraphic(new ImageView(getClass().getResource("icoes\\other.png").toExternalForm()));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
