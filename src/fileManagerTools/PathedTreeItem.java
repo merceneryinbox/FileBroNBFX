@@ -55,7 +55,7 @@ public final class PathedTreeItem extends TreeItem<Path> {
         subPathItems = new ArrayList<>();
 
         if (path.getParent() != null) {
-            autosetIcon();
+            // autosetIcon();
         }
     }
 
@@ -74,7 +74,7 @@ public final class PathedTreeItem extends TreeItem<Path> {
         subPaths = new ArrayList<>();
         subPathItems = new ArrayList<>();
         if (path.getParent() != null) {
-            autosetIcon();
+            // autosetIcon();
         }
     }
 
