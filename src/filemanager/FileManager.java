@@ -18,16 +18,16 @@ import javafx.stage.Stage;
 public class FileManager extends Application {
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage primaryStage) throws Exception {
 
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-
-        root.setStyle(STYLESHEET_MODENA);
+        setUserAgentStylesheet(Application.STYLESHEET_CASPIAN);
+        primaryStage.setTitle("Fedulov Oleg (mercenery@inbox.ru; +7 921 989 68 90) file commander");
         Scene scene = new Scene(root);
-
-        stage.setScene(scene);
-
-        stage.show();
+        primaryStage.setScene(scene);
+        primaryStage.setAlwaysOnTop(false);
+        primaryStage.centerOnScreen();
+        primaryStage.show();
     }
 
     /**

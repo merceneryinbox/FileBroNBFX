@@ -47,10 +47,10 @@ public class FXMLDocumentController implements Initializable {
     private Iterable<Path> rootDirs;
     private List<PathedTreeItem> rootTreeItemsList;
     private ArrayList<PathedTreeItem> subPathedTIListInSelectedPTI;
-    private List<MenuItem> mnBtItemsList;
+    private List<MenuItem> mnBtnItemsList;
     private Image img;
     public ImageView rootImgView;
-    private final String hdPicPath = "icoes/hd_32x32.png";
+    private final String hdPicPath = "icoes\\hd_32x32.png";
     private PathedTreeItem selectedRootItem;
     private PathedTreeItem selectedPTI;
 
@@ -132,7 +132,7 @@ public class FXMLDocumentController implements Initializable {
         rootImgView = new ImageView(img);
         rootDirs = new ArrayList<>();
         rootTreeItemsList = new ArrayList<>();
-        mnBtItemsList = new ArrayList<>();
+        mnBtnItemsList = new ArrayList<>();
         subPathedTIListInSelectedPTI = new ArrayList<>();
         rootDirs = FileSystems.getDefault().getRootDirectories();
 
@@ -143,24 +143,26 @@ public class FXMLDocumentController implements Initializable {
         tblViewClmnFileSize.setCellValueFactory(new PropertyValueFactory<PathedTreeItem, Number>("size"));
         tblViewClmnFileLastMod.setCellValueFactory(new PropertyValueFactory<PathedTreeItem, Number>("lastModFormatedString"));
 
-// create list with PathedTreeItems from list of root directoryes in filesystem
+// create list with PathedTreeItems from list of root directoryes of filesystem
         for (Path rootDir : rootDirs) {
             MenuItem tmpMMenuItem = new MenuItem(rootDir.toString());
             tmpMMenuItem.setGraphic(rootImgView);
-            mnBtItemsList.add(tmpMMenuItem);
+            mnBtnItemsList.add(tmpMMenuItem);
         }
 
 // add list of MenuItems with names of found drives in menu button drop down items
-        mnBtn.getItems().addAll(mnBtItemsList);
+        mnBtn.getItems().addAll(mnBtnItemsList);
 
 // assign Action handle to each menu item in drop button menu then click on it
-        mnBtItemsList.forEach((MenuItem mnBtnSelectedItem) -> {
+        mnBtnItemsList.forEach((MenuItem mnBtnSelectedItem) -> {
             mnBtnSelectedItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     tvLeft.setRoot(null);
                     selectedRootItem = new PathedTreeItem(mnBtnSelectedItem.getText());
                     tvLeft.setRoot(selectedRootItem);
+                    selectedRootItem.setExpanded(true);
+                    tvLeft.setShowRoot(false);
                     tvLeft.setShowRoot(true);
                 }
             });
