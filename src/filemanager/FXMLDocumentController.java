@@ -26,8 +26,11 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -39,6 +42,7 @@ import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class FXMLDocumentController implements Initializable {
@@ -228,13 +232,15 @@ public class FXMLDocumentController implements Initializable {
     } // не удалять !
 
     // start of menu items click handling
-    public void fileMnMethodSelect(ActionEvent actionEvent) {
+    public void fileMnMethodSelect(ActionEvent actionEvent) throws IOException {
         Object sourceOfInvokeObject = actionEvent.getSource();
+
         if (!(sourceOfInvokeObject instanceof MenuItem)) {
             return;
         }
         MenuItem clikedMenuItem = (MenuItem) sourceOfInvokeObject;
         String nameOfclikedMenuItem = clikedMenuItem.getId();
+
         switch (nameOfclikedMenuItem) {
             case "ssMnNew":
                 makeNew();
@@ -254,8 +260,16 @@ public class FXMLDocumentController implements Initializable {
 
 // Start menu File commands
     @FXML
-
     public void makeNew() throws IOException {
+        Parent rootAdd = new FXMLLoader(getClass().getResource("FXMLnewFileDialog.fxml")).load();
+        Scene sceneAdd = new Scene(rootAdd);
+
+        Stage addStage = new Stage();
+        addStage.setTitle("Create new.");
+        addStage.setAlwaysOnTop(true);
+        addStage.initModality(Modality.WINDOW_MODAL);
+        addStage.setScene(sceneAdd);
+        addStage.show();
     }
 
     @FXML
@@ -311,7 +325,6 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     public void delete() {
-
     }
 
     @FXML
