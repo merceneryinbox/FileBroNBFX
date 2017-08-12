@@ -48,9 +48,6 @@ public final class PathedTreeItem extends TreeItem<Path> {
         nameOfFile = getNameOfFile();
         extension = getExtension();
         size = getSize();
-        // sizeInFormatedString = getSizeInFormatedString();
-        // lastModFormatedString = getLastModFormatedString();
-
         subPaths = new ArrayList<>();
         subPathItems = new ArrayList<>();
 
