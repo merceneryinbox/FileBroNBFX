@@ -87,7 +87,7 @@ public final class PathedTreeItem extends TreeItem<Path> {
         isVisited = visited;
     }
 
-    public void populateMyself() {
+    private void populateMyself() {
 // населяю элемент если - это папка и если она не нуль
         if (Files.isDirectory(path) && path != null) {
 

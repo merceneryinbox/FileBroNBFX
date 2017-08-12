@@ -177,7 +177,7 @@ public class FXMLDocumentController implements Initializable {
 
                 ExecutorService pool = Executors.newFixedThreadPool(1);
                 selectedPTI = (PathedTreeItem) newValue; // приведение типа
-                selectedPTI.populateMyself();
+                // selectedPTI.populateMyself();
                 Path tmpPath = selectedPTI.getValue();
                 subPathedTIListInSelectedPTI.clear(); // обнуление верменного листа подэлементов выбранного элемента
                 try {
