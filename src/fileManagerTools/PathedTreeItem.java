@@ -218,10 +218,10 @@ public final class PathedTreeItem extends TreeItem<Path> {
     public String getLastModFormatedString() {
         try {
             ft = Files.getLastModifiedTime(this.getValue());
-            lastModFormatedString = df.format(ft.toMillis());
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return lastModFormatedString;
+        return df.format(ft.toMillis());
     }
 }

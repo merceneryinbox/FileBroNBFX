@@ -234,8 +234,8 @@ public class FXMLDocumentController implements Initializable {
             return;
         }
         MenuItem clikedMenuItem = (MenuItem) sourceOfInvokeObject;
-        String nameOfClickedBtn = clikedMenuItem.getId();
-        switch (nameOfClickedBtn) {
+        String nameOfclikedMenuItem = clikedMenuItem.getId();
+        switch (nameOfclikedMenuItem) {
             case "ssMnNew":
                 makeNew();
             case "ssMnOpen":
@@ -255,8 +255,7 @@ public class FXMLDocumentController implements Initializable {
 // Start menu File commands
     @FXML
 
-    public void makeNew() {
-
+    public void makeNew() throws IOException {
     }
 
     @FXML
