@@ -6,7 +6,6 @@
 package fileManagerTools;
 
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -65,8 +64,6 @@ public final class PathedTreeItem extends TreeItem<Path> {
         nameOfFile = getNameOfFile();
         extension = getExtension();
         size = getSize();
-        // sizeInFormatedString = getSizeInFormatedString();
-        //lastModFormatedString = getLastModFormatedString();
 
         subPaths = new ArrayList<>();
         subPathItems = new ArrayList<>();
@@ -82,33 +79,6 @@ public final class PathedTreeItem extends TreeItem<Path> {
 
     public void setVisited(boolean visited) {
         isVisited = visited;
-    }
-
-    private void populateMyself() {
-// населяю элемент если - это папка и если она не нуль
-        if (Files.isDirectory(path) && path != null) {
-
-            // создаю Iterable объект из элементов внутри папки (не рекурсивно)
-            try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(path)) {
-                for (Path path1 : directoryStream) {
-
-                    // сохраняю каждый найденный элемент типа - Path из Iterable списка - directoryStream в ArrayList - subPaths
-                    subPaths.add(path1);
-                }
-
-                // теперь беру каждый элемент из subPaths и оборачиваю его в PathedTreeItem, а потом добавляю в ArrayList
-                // subPathItems
-                subPaths.forEach((p) -> {
-                    subPathItems.add(new PathedTreeItem(p));
-                });
-
-                // а теперь subPathItems добавляю в родительский элемент
-                this.getChildren().addAll(subPathItems);
-
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
     }
 
     private void autosetIcon() {
