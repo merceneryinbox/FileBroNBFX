@@ -8,7 +8,6 @@ package fileManagerTools;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
-import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.FileTime;
@@ -97,15 +96,13 @@ public final class PathedTreeItem extends TreeItem<Path> {
                 for (Path path1 : directoryStream) {
 
                     // сохраняю каждый найденный элемент типа - Path из Iterable списка - directoryStream в ArrayList - subPaths
-                    if (Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS)) {
-                        subPaths.add(path1);
-                    }
+                    subPaths.add(path1);
                 }
 
                 // теперь беру каждый элемент из subPaths и оборачиваю его в PathedTreeItem, а потом добавляю в ArrayList
                 // subPathItems
-                subPaths.forEach((Path path1) -> {
-                    subPathItems.add(new PathedTreeItem(path1));
+                subPaths.forEach((p) -> {
+                    subPathItems.add(new PathedTreeItem(p));
                 });
 
                 // а теперь subPathItems добавляю в родительский элемент
