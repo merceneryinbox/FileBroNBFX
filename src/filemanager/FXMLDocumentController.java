@@ -175,13 +175,12 @@ public class FXMLDocumentController implements Initializable {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
 
-                ExecutorService pool = Executors.newFixedThreadPool(1);
+                ExecutorService singleThreadExetutorServise = Executors.newSingleThreadExecutor();
                 selectedPTI = (PathedTreeItem) newValue; // приведение типа
-                // selectedPTI.populateMyself();
-                Path tmpPath = selectedPTI.getValue();
-                subPathedTIListInSelectedPTI.clear(); // обнуление верменного листа подэлементов выбранного элемента
+                Path tmpPath = selectedPTI.getValue(); // получение элемента файловой системы
+                subPathedTIListInSelectedPTI.clear(); // обнуление верменного листа подэлементов выбранного элемента TreeView
                 try {
-                    pool.execute(new Runnable() {
+                    singleThreadExetutorServise.execute(new Runnable() {
                         @Override
                         public void run() {
                             // если выбранный элемент - папка = > берём каждый подэлемент папки и обрачиваем его в
@@ -212,16 +211,16 @@ public class FXMLDocumentController implements Initializable {
                     e.printStackTrace();
                 } finally {
                     System.out.println("attempt to shutdown executor");
-                    pool.shutdown();
+                    singleThreadExetutorServise.shutdown();
                     try {
-                        pool.awaitTermination(5, TimeUnit.SECONDS);
+                        singleThreadExetutorServise.awaitTermination(5, TimeUnit.SECONDS);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    if (!pool.isTerminated()) {
+                    if (!singleThreadExetutorServise.isTerminated()) {
                         System.err.println("cancel non-finished tasks");
                     }
-                    pool.shutdownNow();
+                    singleThreadExetutorServise.shutdownNow();
                     System.out.println("shutdown finished");
                 }
             }
